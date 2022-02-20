@@ -14,7 +14,7 @@ import java.util.Scanner;
     
     public void InsertarJugadores () {
         Nodo nuevo = new Nodo ();
-        System.out.print( " Ingrese numero del jugador ");
+        System.out.print( " Ingrese nombre del jugador ");
         nuevo.dato = Teclado.next();
         
         if(Cabeza == null){
@@ -47,7 +47,7 @@ import java.util.Scanner;
         Actual = Cabeza;
         boolean Encontrado = false;
         
-        System.out.print(" Ingrese el dato del Nodo a busar: ");
+        System.out.print(" Ingrese algun dato del jugador a busar: ");
         String nodoBuscado = Teclado.next();
             if(Cabeza != null){
                 do {
@@ -72,7 +72,7 @@ import java.util.Scanner;
         Actual = Cabeza;
         boolean Encontrado = false;
         
-        System.out.print(" Ingrese el dato del Nodo a busar para modificar: ");
+        System.out.print(" Ingrese algun dato del jugador a busar para modificar: ");
         String nodoBuscado = Teclado.next();
             if(Cabeza != null){
                 do {
@@ -102,7 +102,7 @@ import java.util.Scanner;
         Anterior = null;
         boolean Encontrado = false;
         
-        System.out.print(" Ingrese el dato del Nodo a busar para eliminar : ");
+        System.out.print(" Ingrese algun dato del jugador a busar para eliminar : ");
         String nodoBuscado = Teclado.next();
             if(Cabeza != null){
                 do {
@@ -126,7 +126,7 @@ import java.util.Scanner;
                 } while (Actual != Cabeza && Encontrado != true); 
                 
                 if(!Encontrado){
-                    System.out.println("Jugador no encontrado");
+                    System.out.println(" Jugador no encontrado ");
                 }
             } else{
         System.out.println(" Lista vacia ");  
