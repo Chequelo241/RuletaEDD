@@ -3,10 +3,13 @@ import java.io.*;
 
 public class RuletaEDD {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException  {
                
       lista l = new lista();
+      leerTXT T = new leerTXT();
       
+      T.Mostrar();
+              
       l.VerJugadores();
       
       l.InsertarJugadores();
