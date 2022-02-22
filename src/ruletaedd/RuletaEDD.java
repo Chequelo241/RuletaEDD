@@ -13,15 +13,11 @@ public class RuletaEDD {
              
       
       
-      for(int i=0;i<5;i++){
-        if(persona1.cargar_arma()==true){
-            bala=true;    
-        } 
-      }
+       bala=persona1.cargar_arma();
+       
         leerTXT nom=new leerTXT();
         persona1.Nombre=nom.Dame_nombre();
-        System.out.println(persona1.Nombre+" "+bala);
-      
+        System.out.println(bala);
       
       l.VerJugadores();
       

@@ -18,12 +18,9 @@ public class Participante {
 public Boolean cargar_arma(){
     
         int Rn=(int) Math.round(Math.random()*5);
-        
-        for (int i=0; i<=Rn ;i++){
-            
-        if (i==Rn){
-            Arma[i]=true;
-            
+        for (int i=0; i<=Rn ;i++){  
+          if (i==Rn){
+            Arma[i]=true;   
         }
         
      }       
