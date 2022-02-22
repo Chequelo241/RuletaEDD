@@ -4,29 +4,31 @@ package ruletaedd;
 public class Participante {
      
     String Nombre;
-    Boolean [] Arma= new Boolean[5];
-    Boolean Vida; 
+    String Apellido;
+    String Genero;
+    Boolean [] Arma= new Boolean[5]; 
 
     public Participante(){
-        
-      Arma[0]=false; 
-      Arma[1]=false;
-      Arma[2]=false;
-      Arma[3]=false;
-      Arma[4]=false;
-      Arma[5]=false;
-      
-      Vida=true; 
+        for (int i=0; i<5;i++){
+             Arma[i]=false; 
+        }
     }
+         
+
+public Boolean cargar_arma(){
+    
+        int Rn=(int) Math.round(Math.random()*5);
+        
+        for (int i=0; i<=Rn ;i++){
             
-
-public Boolean cargar_arma(int ronda){
-     
-      int puesto=(int) Math.round(Math.random()*5);
-     
-      Arma[puesto]= true;
-      
-      return Arma[ronda];
-
+        if (i==Rn){
+            Arma[i]=true;
+            
+        }
+        
+     }       
+        
+    return Arma[0];
 }
+
 }
