@@ -3,10 +3,10 @@ package ruletaedd;
 
 public class Participante {
      
-    String Nombre;
-    String Apellido;
-    String Genero;
-    Boolean [] Arma= new Boolean[5]; 
+    private String Nombre;
+    private String Apellido;
+    private String Cedula;
+    private Boolean [] Arma= new Boolean[5]; 
 
     public Participante(){
         for (int i=0; i<5;i++){
@@ -21,8 +21,7 @@ public Boolean cargar_arma(){
         for (int i=0; i<=Rn ;i++){  
           if (i==Rn){
             Arma[i]=true;   
-        }
-        
+        }  
      }       
         
     return Arma[0];

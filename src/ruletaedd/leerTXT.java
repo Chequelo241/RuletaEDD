@@ -4,10 +4,9 @@ import java.io.*;
 public class leerTXT {
     
     class Nodo{
-        String nombre;
-        String apellido;
-        String genero;
-        
+        private String nombre;
+        private String apellido;
+        private String genero;
         Nodo siguiente;
         
         Nodo(String nombre, String apellido, String genero){
@@ -42,6 +41,8 @@ public class leerTXT {
         aux.siguiente = new Nodo(array[0], array[1], array[2]);
         
         aux.siguiente.siguiente = this.inicio;
+              
+
     }
     
     void Mostrar(){
@@ -59,12 +60,9 @@ public class leerTXT {
                 
                 aux=aux.siguiente;
             }
-            
-        }
+
     }
-     public String Dame_nombre(){
-     
-         return "aux.nombre";
+
      }
-     
-}
+  }
+

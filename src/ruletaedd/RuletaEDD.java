@@ -10,19 +10,17 @@ public class RuletaEDD {
       Participante persona1= new Participante();
       
       T.Mostrar();
-             
-      
-      
        bala=persona1.cargar_arma();
        
         leerTXT nom=new leerTXT();
-        persona1.Nombre=nom.Dame_nombre();
-        System.out.println(bala);
+        System.out.println();
       
       l.VerJugadores();
       
       l.VerJugadores();
 
     }
+  
 }
+
     

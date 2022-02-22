@@ -1,8 +1,13 @@
 package ruletaedd;
 
 public class Nodo {
-    String dato;
-    Nodo siguiente;
+    Participante participante;
+    Nodo siguiente=this;
+    
+    public Nodo(Participante participante){
+        this.participante=participante;
+        
+    }
     
 }
 
