@@ -9,19 +9,31 @@ package ruletaedd;
     }
     
     //Insertar Nuevo Participante
-    public void Insertar(Participante participante){
-   Nodo Nuevo=new Nodo(participante);
-   if (Primero!=null){
-        Ultimo.siguiente=Nuevo;
-        Nuevo.siguiente=Primero;
-        Ultimo=Nuevo;
-    }else{
-        Nuevo=Primero;
-        Ultimo=Primero;
-        Primero.siguiente= Ultimo;
-   }
-  }
- //Eliminar Participante
+
+  
+ //Recorer y elminar participante
+    public void Eliminar(){
+        Nodo Puntero=new Nodo(Primero.participante);
+        Nodo Anterior=new Nodo(Ultimo.participante);
+        do{
+            if(Puntero.participante.cargar_arma()){
+                if(Puntero==Primero){
+                    Primero=Primero.siguiente;
+                    Ultimo.siguiente=Primero;
+                    }else if(Puntero==Ultimo){
+                    Anterior.siguiente=Ultimo.siguiente;
+                    Ultimo=Anterior;
+                }else {
+                    Anterior.siguiente=Puntero.siguiente;
+                }
+            }
+            Anterior=Puntero;
+            Puntero=Puntero.siguiente;
+        }while(Puntero!=Primero);
+       
+        
+    }
+    
     
 
 } 

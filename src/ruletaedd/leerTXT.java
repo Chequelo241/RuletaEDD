@@ -6,14 +6,14 @@ public class leerTXT {
     class Nodo{
         private String nombre;
         private String apellido;
-        private String genero;
+        private String cedula;
         Nodo siguiente;
         
-        Nodo(String nombre, String apellido, String genero){
+        Nodo(String nombre, String apellido, String CI){
             
             this.nombre = nombre;
             this.apellido = apellido;
-            this.genero = genero;
+            this.cedula = CI;
             
             this.siguiente = null;
         }
@@ -23,11 +23,11 @@ public class leerTXT {
     
     leerTXT() throws FileNotFoundException, IOException{
 
-         BufferedReader obj = new BufferedReader(new FileReader("src/ruletaedd/jugadores.txt"));
+         BufferedReader obj = new BufferedReader(new FileReader("jugadores.txt"));
          String str;
          String[] array = new String[3];
-        
-        this.inicio = new Nodo("APELLIDO ", "NOMBRE ","GENERO ");
+        int count=0;
+        this.inicio = new Nodo("", " ","");
         Nodo aux = this.inicio;
         
         while ((str = obj.readLine())!= null) {
@@ -36,6 +36,7 @@ public class leerTXT {
             aux.siguiente = new Nodo(array[0], array[1], array[2]);
             
             aux = aux.siguiente;
+            count++;
         }
         
         aux.siguiente = new Nodo(array[0], array[1], array[2]);
@@ -44,25 +45,33 @@ public class leerTXT {
               
 
     }
+    public String getnombre(int i){
+        for( i=0;i<=6;i++){
+          inicio.nombre=inicio.siguiente.nombre;
+          return inicio.nombre;
+        }         
+    }
+    public String getapellido(){
+        return inicio.siguiente.apellido;
+    }
+    public String getcedula(){
+        return inicio.siguiente.cedula;
+    }
     
-    void Mostrar(){
+   /* public String Mostrar(){
     
         if(inicio!=null){
-        
-            
+
             Nodo aux= inicio;
             while(aux.siguiente!=inicio){
                 
-                System.out.println(aux.nombre);
-                System.out.println(aux.apellido);
-                System.out.println(aux.genero);
-                System.out.println();
+                return aux.nombre;
+                return aux.apellido;
+                return aux.cedula;
                 
                 aux=aux.siguiente;
             }
 
+        }*/
     }
-
-     }
-  }
 

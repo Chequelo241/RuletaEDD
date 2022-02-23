@@ -6,6 +6,7 @@ public class Participante {
     private String Nombre;
     private String Apellido;
     private String Cedula;
+    private int NumJugador;
     private Boolean [] Arma= new Boolean[5]; 
 
     public Participante(){
@@ -13,8 +14,19 @@ public class Participante {
              Arma[i]=false; 
         }
     }
-         
-
+public String getnombre(String nom){
+    Nombre=nom;
+    return Nombre;
+}
+public void getapellido(String ape){
+    Apellido=ape;
+}
+public void getcedula(String ced){
+    Cedula=ced;
+}
+public void getnumeroj(int nj){
+    NumJugador=nj;
+}
 public Boolean cargar_arma(){
     
         int Rn=(int) Math.round(Math.random()*5);
