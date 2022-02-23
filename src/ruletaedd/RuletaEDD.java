@@ -15,9 +15,7 @@ public class RuletaEDD {
         leerTXT nom=new leerTXT();
         System.out.println();
       
-      l.VerJugadores();
-      
-      l.VerJugadores();
+
 
     }
   

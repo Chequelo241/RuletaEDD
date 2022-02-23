@@ -1,21 +1,27 @@
 package ruletaedd;
 
     public class lista {
+     Nodo Primero;
      Nodo Ultimo;
     public lista(){
+        Primero=null;
         Ultimo=null;
     }
     
     //Insertar Nuevo Participante
-    public lista Insertar(Participante participante){
+    public void Insertar(Participante participante){
    Nodo Nuevo=new Nodo(participante);
-   if (Ultimo!=null){
-        Nuevo.siguiente=Ultimo.siguiente;
+   if (Primero!=null){
         Ultimo.siguiente=Nuevo;
-    }
-    Ultimo=Nuevo;
-    return this;
+        Nuevo.siguiente=Primero;
+        Ultimo=Nuevo;
+    }else{
+        Nuevo=Primero;
+        Ultimo=Primero;
+        Primero.siguiente= Ultimo;
+   }
   }
- 
+ //Eliminar Participante
+    
 
 } 
