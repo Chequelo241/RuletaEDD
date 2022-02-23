@@ -24,11 +24,10 @@ public class leerTXT {
     
     leerTXT() throws FileNotFoundException, IOException{
 
-         BufferedReader obj = new BufferedReader(new FileReader("src/ruletaedd/jugadores.txt"));
+         BufferedReader obj = new BufferedReader(new FileReader("jugadores.txt"));
          String str;
          String[] array = new String[3];
-        
-        this.inicio = new Nodo("APELLIDO ", "NOMBRE ","GENERO ");
+
         Nodo aux = this.inicio;
         
         while ((str = obj.readLine())!= null) {
