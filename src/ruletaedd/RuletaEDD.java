@@ -1,29 +1,30 @@
 package ruletaedd;
 import java.io.*;
 class Nodo {
-    Participante participante;
+    String nombre, apellido, cedula;
     Nodo siguiente = this;
     
-    public Nodo(Participante participante){
-        this.participante = participante;     
+    public Nodo(String nom,String ape,String ced){
+        this.nombre=nom;
+        this.apellido=ape;
+        this.cedula=ced;  
     }
      class lista{
          Nodo LS;
          lista(){
              LS = null;    
          }
-        public void Crear(Participante part){
+        public void Crear(String nom,String ape,String ced){
         if(LS == null){
-          LS = new Nodo(part);  
+          LS = new Nodo(nom,ape,ced);  
         }else{
             Nodo aux = LS;
             while (aux.siguiente != null)
                 aux = aux.siguiente;
-            aux.siguiente = new Nodo(part);
+            aux.siguiente = new Nodo(nom,ape,ced);
             
         }
      }
-    
         
     }
      class listaCircular{
@@ -31,15 +32,15 @@ class Nodo {
          listaCircular(){
              LS = null;    
          }
-        public void Crear(Participante part){
+        public void Crear(String nom,String ape,String ced){
         if(LS == null){
-          LS = new Nodo(part);
+          LS = new Nodo(nom,ape,ced);
           LS.siguiente = LS;
         }else{
             Nodo aux = LS;
             while (aux.siguiente != LS.siguiente){
                aux = aux.siguiente; }    
-            aux.siguiente = new Nodo(part);
+            aux.siguiente = new Nodo(nom,ape,ced);
             aux.siguiente.siguiente = LS;
             
         }
