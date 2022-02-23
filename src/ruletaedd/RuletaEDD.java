@@ -8,18 +8,39 @@ class Nodo {
         this.participante = participante;     
     }
      class lista{
-         Nodo LC;
+         Nodo LS;
          lista(){
-             LC = null;    
+             LS = null;    
          }
         public void Crear(Participante part){
-        if(LC == null){
-          LC = new Nodo(part);  
+        if(LS == null){
+          LS = new Nodo(part);  
         }else{
-            Nodo aux = LC;
+            Nodo aux = LS;
             while (aux.siguiente != null)
                 aux = aux.siguiente;
             aux.siguiente = new Nodo(part);
+            
+        }
+     }
+    
+        
+    }
+     class listaCircular{
+         Nodo LS;
+         listaCircular(){
+             LS = null;    
+         }
+        public void Crear(Participante part){
+        if(LS == null){
+          LS = new Nodo(part);
+          LS.siguiente = LS;
+        }else{
+            Nodo aux = LS;
+            while (aux.siguiente != LS.siguiente)
+                aux = aux.siguiente;
+            aux.siguiente = new Nodo(part);
+            aux.siguiente.siguiente = LS;
             
         }
      }
