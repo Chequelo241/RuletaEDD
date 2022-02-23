@@ -37,8 +37,8 @@ class Nodo {
           LS.siguiente = LS;
         }else{
             Nodo aux = LS;
-            while (aux.siguiente != LS.siguiente)
-                aux = aux.siguiente;
+            while (aux.siguiente != LS.siguiente){
+               aux = aux.siguiente; }    
             aux.siguiente = new Nodo(part);
             aux.siguiente.siguiente = LS;
             
