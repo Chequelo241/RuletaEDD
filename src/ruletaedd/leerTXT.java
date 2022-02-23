@@ -4,17 +4,17 @@ import java.io.*;
 public class leerTXT {
     
     class Nodo{
-        String nombre;
-        String apellido;
-        String genero;
+        String Nombre;
+        String Apellido;
+        String Cedula;
         
         Nodo siguiente;
         
-        Nodo(String nombre, String apellido, String genero){
+        Nodo(String Nom, String Ape, String CI){
             
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.genero = genero;
+            this.Nombre = Nom;
+            this.Apellido = Ape;
+            this.Cedula = CI;
             
             this.siguiente = null;
         }
@@ -22,12 +22,15 @@ public class leerTXT {
     
     Nodo inicio;
     
+    FileReader lectura;
     leerTXT() throws FileNotFoundException, IOException{
-
-         BufferedReader obj = new BufferedReader(new FileReader("jugadores.txt"));
+        
+         lectura =new FileReader("jugadores.txt");
+         BufferedReader obj = new BufferedReader(lectura);
          String str;
          String[] array = new String[3];
-
+        
+        this.inicio = new Nodo(" ", " "," "); //no por que se imprime
         Nodo aux = this.inicio;
         
         while ((str = obj.readLine())!= null) {
@@ -42,18 +45,20 @@ public class leerTXT {
         
         aux.siguiente.siguiente = this.inicio;
     }
-    
+   void llenar (){
+       
+       
+}
     void Mostrar(){
     
         if(inicio!=null){
-        
-            
+  
             Nodo aux= inicio;
             while(aux.siguiente!=inicio){
                 
-                System.out.println(aux.nombre);
-                System.out.println(aux.apellido);
-                System.out.println(aux.genero);
+                System.out.println("Nombre: "+aux.Nombre);
+                System.out.println("Apellido: "+aux.Apellido);
+                System.out.println("Cedula: "+aux.Cedula);
                 System.out.println();
                 
                 aux=aux.siguiente;
@@ -67,3 +72,4 @@ public class leerTXT {
      }
      
 }
+
