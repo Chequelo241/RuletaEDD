@@ -113,15 +113,87 @@ class jugadoresLista {
             return "F";
         }
     }
-     }   
-     public void ComprovacionTiro() {
+     }
+     
+     public void disparaMulti() {
+        Nodo aux = this.primero;
+        String[] bDatoboo = this.checkBala.split(" ");
+        boolean controlB = true;
+        
+        for (String bDato : bDatoboo) {
+            
+         if (this.jugadoresNum> 0) {
+           if (bDato.equals("V")) {
+           aux.siguiente = aux.siguiente.siguiente;
+           this.jugadoresNum--;
+           controlB = false;
+          } else {
+            aux = aux.siguiente;
+            controlB = true;
+                }
+            } else {
+                this.primero = null;
+                this.jugadoresNum--;
+            }
+        }
+      
+        if (controlB) {
+            this.primero = aux;
+        } else {
+            this.primero = aux.siguiente;
+        }
+        this.checkBala = "";
+    }
+     
+     public void registroBalas(boolean IED) {
+        Nodo aux = this.primero;
+        String str;
+        str = aux.revolver.verificacionBala();
+        if (IED) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.out.println("");
+                System.out.println(":: Error Interno...");
+            }
+        }
+        System.out.println("");
+        if (str.equals("V")) {//Si str (aux.revolver.verificacionBala())es verdadero, entonces:
+            this.jugadoresElim += aux.siguiente.participante.nombre+" "+ aux.siguiente.participante.apellido+" "+ aux.siguiente.participante.cedula + "\n";
+            System.out.println(": "+aux.participante.nombre+" mató a "+aux.siguiente.participante.nombre);
+        } else {
+            System.out.println(": "+aux.participante.nombre + " falló ");
+        }
+        this.checkBala += str;
+       
+        while (aux.siguiente != this.primero) {
+            aux = aux.siguiente;
+            str = aux.revolver.verificacionBala();
+            if (IED) {
+                try {
+              Thread.sleep(2000);
+              } catch (InterruptedException e) {
+              System.out.println("");
+              System.out.println("Error...");
+                }
+            }
+            if (str.equals("V")) {//Se repite la comprobación de si str (aux.revolver.verificacionBala())es verdadero, pero para los participantes diferentes a inicio.
+                this.jugadoresElim += aux.siguiente.participante.nombre + " "+aux.siguiente.participante.apellido+" "+aux.siguiente.participante.cedula + "\n";
+                System.out.println(": " + aux.participante.nombre+" mató a "+ aux.siguiente.participante.nombre);
+            } else {
+                System.out.println(": " + aux.participante.nombre + " falló ");
+            }this.checkBala += " " + str;
+        }
+    }
+     
+     public void ComprovaciónTiro() {
         System.out.println(" ");
-        System.out.println( this.primero.participante.nombre+" "+ this.primero.participante.apellido + " Le dipsaró a: " + this.primero.siguiente.participante.nombre
+        System.out.println(" El jugador "+ this.primero.participante.nombre+" "+ this.primero.participante.apellido + " Le dipsaró a el jugador " + this.primero.siguiente.participante.nombre
                 + " " + this.primero.siguiente.participante.apellido + ".");
         if (this.primero.revolver.disparar()) { 
             this.jugadoresElim +=this.primero.siguiente.participante.nombre+" "+ this.primero.siguiente.participante.apellido + " "+this.primero.siguiente.participante.cedula + "\n";
             System.out.println(": " + this.primero.participante.nombre+" Mató a " + this.primero.siguiente.participante.nombre+".");
-            System.out.println(": " + this.primero.participante.nombre+" recarga su arma.");
+            System.out.println(": El jugador " + this.primero.participante.nombre+" recargó el arma.");
             this.primero.siguiente = this.primero.siguiente.siguiente;
             this.jugadoresNum--;
         } else {
@@ -130,14 +202,102 @@ class jugadoresLista {
         this.primero = this.primero.siguiente;
 
     }
-     
-   
-  
- public class RuletaEDD {
+         public void verLista() {
+        Nodo aux = this.primero;
+        if (this.jugadoresNum==0) {
+                System.out.println("  ");
+                System.out.println("Todos los participantes murieron");
+                this.ganador = ": Todos los participantes murieron\n";
+        }else if(jugadoresNum==1){
+                System.out.println("  ");
+                System.out.println(" El jugador " + aux.participante.nombre + " " + aux.participante.apellido + " " +aux.participante.cedula+ " ganó");
+                this.ganador = aux.participante.nombre + " " + aux.participante.apellido + " " + aux.participante.cedula + "\n";
+        }else{
+                System.out.println(aux.participante.nombre + " " + aux.participante.apellido);
+                while (aux.siguiente != this.primero) {
+                    aux = aux.siguiente;
+                    System.out.println(aux.participante.nombre + " " + aux.participante.apellido );
+                }
+        }
+        }
+    }
+
+public class RuletaEDD {
+        
+        static Scanner entrada = new Scanner(System.in);
         
     public static void main(String[] args) throws IOException{
-     
+            String conf = "";
+            System.out.println(" Ruleta Rusa:");
+            System.out.println("Presione 1 para empezar la ruleta:");
+            conf = entrada.nextLine();
+            
+            switch (conf) {
+                case "1":
+                   
+                    Play();
+                    break;
+
+                case "00":
+                    break;
+                default:
+                    System.out.println("");
+                    System.out.println(":: La Opción Seleccionada es Inválida.");
+                    break;
+            }
+    }
+    
+        private static void Play() throws IOException {
+            int NJ = 0;
+            System.out.println("");
+            jugadoresLista L;
+            L = new jugadoresLista(leerTXT.leerArchivo("jugadores.txt"));
+
+            System.out.println("");
+            System.out.println(" Los Jugadores son los siguientes: ");
+            mostrar();
+            L.verLista();
+
+                System.out.println("");
+                System.out.println(" Pulse la tecla Enter para continuar ");
+                entrada.nextLine();
+                while (L.jugadoresNum > 1) {
+                    NJ++;
+                    System.out.println(" Empieza la ronda numero " + NJ + ") ");
+                    L.registroBalas(true);
+                    L.disparaMulti();
+                    if (L.jugadoresNum > 1) {
+                        System.out.println("  ");
+                        System.out.println(" Participantes Vivos: ");
+                        L.verLista();
+                    }
+                    System.out.println(" Pulse la tecla Enter para salir ");
+                    entrada.nextLine();
+                }
+            L.verLista();
+ 
+            leerTXT.escribirArchivo("Derrotados.out", L.jugadoresElim, "Los derrotadosson:");
+            leerTXT.escribirArchivo("ganador.out", L.ganador, "El Ganador de la partid " + NJ +" es:");
+        }
+        private static void mostrar() throws IOException {
+        String participantes;
+        participantes = leerTXT.leerArchivo("jugadores.txt");
         
-    }       
+        System.out.println("");
+        String[] listaParticipante = participantes.split(" ");
+        System.out.println(listaParticipante[0]); 
+        
+        for (int i = 1; i < listaParticipante.length; i++) {
+           
+            System.out.println(listaParticipante[i]);
+
+        }
+        
+    }
+
+  
+       
+
 }
+
 
