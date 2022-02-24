@@ -1,15 +1,63 @@
 package ruletaedd;
 import java.io.*;
-    class Nodo {
-        String nombre, apellido, cedula;
-        Nodo siguiente = this;
+import java.util.Scanner;
+
+
+class jugadoresLista {
+    Nodo primero;
+    String jugadoresElim;
+    String ganador;
+    String checkBala;
+    int jugadoresNum;
     
-    public Nodo(String nom,String ape,String ced){
-        this.nombre=nom;
-        this.apellido=ape;
-        this.cedula=ced;  
+        jugadoresLista(String dato) {
+        this.jugadoresElim = "";
+        this.ganador = "";
+        this.checkBala = "";
+        this.jugadoresNum= 0;
+        String[] jugadores = dato.split("\n");
+        String[] jData;
+        for (String participante : jugadores) {
+           jData = participante.split(" ");
+           Crear(new Nodo(new Participante(jData[0], jData[1], jData[2])));
+           this.jugadoresNum++;
+        }
+    }
+    class Nodo {
+        Participante participante;
+        arma revolver;
+        Nodo siguiente;
+    
+    public Nodo(Participante participante){
+        this.participante= participante;
+        this.siguiente=null;
+        this.revolver = new arma();
        }
 }
+    class Participante {
+        String nombre;
+        String apellido;
+        String cedula;
+        
+        Participante(String nombre, String apellido, String cedula) {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.cedula = cedula;
+        }
+    }
+    public void Crear(Nodo part){
+        if(this.primero == null){
+          this.primero = part;
+          this.primero.siguiente = part;
+        }else{
+            Nodo aux = this.primero;
+            while (aux.siguiente != this.primero){
+               aux = aux.siguiente; }    
+            aux.siguiente = part;
+            part.siguiente = this.primero;
+            
+        }
+     }
     class NodoRevolver{
         boolean bala;
         NodoRevolver Siguiente;
@@ -17,8 +65,7 @@ import java.io.*;
     NodoRevolver(){
         bala = false;
     }   
-       
-       
+           
 }
      class arma{
          NodoRevolver revolver;
@@ -32,7 +79,6 @@ import java.io.*;
         }
         aux.bala = true;
     }
-         
          public arma(){
              revolver=new NodoRevolver();
              NodoRevolver aux=revolver;
@@ -43,7 +89,6 @@ import java.io.*;
         aux.Siguiente=revolver;
         cargarArma();
          }
-         
         public void recargarArma() {
         NodoRevolver aux = this.revolver;
         for (int i = 0; i < 6; i++) {
@@ -51,8 +96,7 @@ import java.io.*;
             aux = aux.Siguiente;
         }
         cargarArma();
-    } 
-        
+    }
         public boolean disparar() {
         boolean tiro = revolver.bala;
         if (tiro) {
@@ -62,50 +106,32 @@ import java.io.*;
         }
         return tiro;
     }
-        
-     }
-
-        class listaS{
-         Nodo LS;
-         listaS(){
-             LS = null;    
-         }
-        public void Crear(String nom,String ape,String ced){
-        if(LS == null){
-          LS = new Nodo(nom,ape,ced);  
-        }else{
-            Nodo aux = LS;
-            while (aux.siguiente != null)
-                aux = aux.siguiente;
-            aux.siguiente = new Nodo(nom,ape,ced);
-            
+        public String verificacionBala() {
+        if (disparar()) {
+            return "V";
+        } else {
+            return "F";
         }
-     }
-        
     }
-     class listaCircular{
-         Nodo LS;
-         listaCircular(){
-             LS = null;    
-         }
-        public void Crear(String nom,String ape,String ced){
-        if(LS == null){
-          LS = new Nodo(nom,ape,ced);
-          LS.siguiente = LS;
-        }else{
-            Nodo aux = LS;
-            while (aux.siguiente != LS.siguiente){
-               aux = aux.siguiente; }    
-            aux.siguiente = new Nodo(nom,ape,ced);
-            aux.siguiente.siguiente = LS;
-            
+     }   
+     public void ComprovaciónTiro() {
+        System.out.println(" ");
+        System.out.println(" El jugador "+ this.primero.participante.nombre+" "+ this.primero.participante.apellido + " Le dipsaró a el jugador " + this.primero.siguiente.participante.nombre
+                + " " + this.primero.siguiente.participante.apellido + ".");
+        if (this.primero.revolver.disparar()) { 
+            this.jugadoresElim +=this.primero.siguiente.participante.nombre+" "+ this.primero.siguiente.participante.apellido + " "+this.primero.siguiente.participante.cedula + "\n";
+            System.out.println(": " + this.primero.participante.nombre+" Mató a " + this.primero.siguiente.participante.nombre+".");
+            System.out.println(": El jugador " + this.primero.participante.nombre+" ha recargado el arma.");
+            this.primero.siguiente = this.primero.siguiente.siguiente;
+            this.jugadoresNum--;
+        } else {
+            System.out.println(":: " + this.primero.participante.nombre + " falló.");
         }
-     }
-    
-        
-    }
-    
+        this.primero = this.primero.siguiente;
 
+    }
+     
+}
   
 
     public class RuletaEDD 
