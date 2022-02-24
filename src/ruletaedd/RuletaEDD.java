@@ -114,14 +114,14 @@ class jugadoresLista {
         }
     }
      }   
-     public void ComprovaciónTiro() {
+     public void ComprovacionTiro() {
         System.out.println(" ");
-        System.out.println(" El jugador "+ this.primero.participante.nombre+" "+ this.primero.participante.apellido + " Le dipsaró a el jugador " + this.primero.siguiente.participante.nombre
+        System.out.println( this.primero.participante.nombre+" "+ this.primero.participante.apellido + " Le dipsaró a: " + this.primero.siguiente.participante.nombre
                 + " " + this.primero.siguiente.participante.apellido + ".");
         if (this.primero.revolver.disparar()) { 
             this.jugadoresElim +=this.primero.siguiente.participante.nombre+" "+ this.primero.siguiente.participante.apellido + " "+this.primero.siguiente.participante.cedula + "\n";
             System.out.println(": " + this.primero.participante.nombre+" Mató a " + this.primero.siguiente.participante.nombre+".");
-            System.out.println(": El jugador " + this.primero.participante.nombre+" ha recargado el arma.");
+            System.out.println(": " + this.primero.participante.nombre+" recarga su arma.");
             this.primero.siguiente = this.primero.siguiente.siguiente;
             this.jugadoresNum--;
         } else {
@@ -131,14 +131,13 @@ class jugadoresLista {
 
     }
      
-}
+   
   
-
-    public class RuletaEDD 
-    public static void main(String[] args) throws IOException{
-    
+ public class RuletaEDD {
         
+    public static void main(String[] args) throws IOException{
+     
+        
+    }       
+}
 
-    }
-
-    
