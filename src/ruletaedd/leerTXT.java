@@ -1,77 +1,32 @@
 package ruletaedd;
 import java.io.*;
 
-public class leerTXT {
+ class leerTXT {
     
-    class Nodo{
-        private String nombre;
-        private String apellido;
-        private String cedula;
-        Nodo siguiente;
+     static String leerArchivo(String ruta) throws IOException {
+
+        BufferedReader br = new BufferedReader(new FileReader(ruta)); //leer jugadores.txt
+
+        String linea;
+        linea = br.readLine();
+        String datos = linea;
         
-        Nodo(String nombre, String apellido, String CI){
-            
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.cedula = CI;
-            
-            this.siguiente = null;
+        while ((linea = br.readLine()) != null) {
+            datos += "\n" + linea;
+        }
+        return datos;
+    }
+        
+    static void escribirArchivo(String ruta, String msg, String Dato) throws IOException {
+        //Objeto de la Clase FileWriter que permitirÃ¡ ubicar el archivo.
+        FileWriter archivo = new FileWriter(ruta, true);
+        
+        //Objeto de la Clase PrintWriter que permitirÃ¡ escribir Dato y msg en el archivo.
+        try (PrintWriter pw = new PrintWriter(archivo)) {
+            pw.println(Dato);
+            pw.println(msg);
+            pw.close(); //Cerrar el archivo.
         }
     }
-    
-    Nodo inicio;
-    
-    leerTXT() throws FileNotFoundException, IOException{
-
-         BufferedReader obj = new BufferedReader(new FileReader("jugadores.txt"));
-         String str;
-         String[] array = new String[3];
-        int count=0;
-        this.inicio = new Nodo("", " ","");
-        Nodo aux = this.inicio;
-        
-        while ((str = obj.readLine())!= null) {
-            
-            array = str.split(" ");
-            aux.siguiente = new Nodo(array[0], array[1], array[2]);
-            
-            aux = aux.siguiente;
-            count++;
-        }
-        
-        aux.siguiente = new Nodo(array[0], array[1], array[2]);
-        
-        aux.siguiente.siguiente = this.inicio;
-              
-
-    }
-    public String getnombre(int i){
-        for( i=0;i<=6;i++){
-          inicio.nombre=inicio.siguiente.nombre;
-          return inicio.nombre;
-        }         
-    }
-    public String getapellido(){
-        return inicio.siguiente.apellido;
-    }
-    public String getcedula(){
-        return inicio.siguiente.cedula;
-    }
-    
-   /* public String Mostrar(){
-    
-        if(inicio!=null){
-
-            Nodo aux= inicio;
-            while(aux.siguiente!=inicio){
-                
-                return aux.nombre;
-                return aux.apellido;
-                return aux.cedula;
-                
-                aux=aux.siguiente;
-            }
-
-        }*/
-    }
+}
 
